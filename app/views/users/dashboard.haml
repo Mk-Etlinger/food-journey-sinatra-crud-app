@@ -1,0 +1,17 @@
+%h1== Welcome #{@user.username}!
+
+%form{:action => "/new", :method => "POST"}
+    %h1 Add a meal
+    %p
+    %label Breakfast
+    %input{:type => "text", :name => ""}/ 
+    %p
+    %label Lunch
+    %input{:type => "password", :name => ""}/
+    %p
+    %label Dinner
+    %input{:type => "text", :name => ""}/
+    %p
+    %label Snack
+    %input{:type => "text", :name => ""}/
+    %input{:type => "submit", :value => "Add Meal"}/
