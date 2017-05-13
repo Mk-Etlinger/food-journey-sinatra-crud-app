@@ -32,7 +32,8 @@ class ApplicationController < Sinatra::Base
   end
   
   get '/login' do
-    redirect("/tweets") if logged_in?(session)
+    # @user = User.find(session[:id]) if logged_in?(session)
+    # redirect("/dashboard/#{@user.username}") if logged_in?(session)
     haml :login
   end
 
@@ -43,7 +44,7 @@ class ApplicationController < Sinatra::Base
     else
       redirect "/login"
     end
-    redirect "/tweets"
+    redirect "/dashboard/#{@user.username}"
   end
 
   get '/logout' do
