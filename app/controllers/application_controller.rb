@@ -15,17 +15,16 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    redirect("/dashboard") if logged_in?(session)
+    # redirect("/dashboard") if logged_in?(session)
 
     haml :'registration/signup'
   end
   
   post '/signup' do
     @user = User.new(params)
-
     if @user.save
       session[:id] = @user.id
-      redirect "/dashboard"
+      redirect "/dashboard/#{@user.username}"
     else
       redirect "/signup"
     end
@@ -34,7 +33,7 @@ class ApplicationController < Sinatra::Base
   
   get '/login' do
     redirect("/tweets") if logged_in?(session)
-    erb :login
+    haml :login
   end
 
   post '/login' do
