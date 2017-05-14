@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170513033029) do
+ActiveRecord::Schema.define(version: 20170514010047) do
 
   create_table "ingredients", force: :cascade do |t|
-    t.string "description"
+    t.string "name"
   end
 
   create_table "meal_ingredients", force: :cascade do |t|
@@ -24,13 +24,9 @@ ActiveRecord::Schema.define(version: 20170513033029) do
 
   create_table "meals", force: :cascade do |t|
     t.datetime "date_time"
-    t.string   "type"
+    t.string   "meal_type"
     t.integer  "user_id"
-  end
-
-  create_table "tweets", force: :cascade do |t|
-    t.string  "content"
-    t.integer "user_id"
+    t.string   "description"
   end
 
   create_table "users", force: :cascade do |t|
