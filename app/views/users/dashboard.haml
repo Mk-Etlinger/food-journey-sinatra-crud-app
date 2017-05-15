@@ -1,8 +1,10 @@
 %h1== Welcome #{@user.username}!
 
 - Meal.all.each do |meal|
-    == #{meal.date_time}
-    = puts meal.description
-
+    -# == #{meal.date_time}
+    %p= meal.description
+    %a{:href => "/edit/#{meal.id}"} edit
+%p
 %a{:href => "/new"} Add a meal!
+
 

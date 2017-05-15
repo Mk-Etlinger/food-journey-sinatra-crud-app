@@ -1,0 +1,28 @@
+%form{:action => "/edit", :method => "POST"}
+    %input{:name => "_method", :type => "hidden", :value => "patch"}/
+
+    %h3 Edit a meal
+    %p
+    %label Breakfast
+    %input{:type => "radio", :name => "meal[meal_type]", :value => "breakfast", :checked => @meal.meal_type == "breakfast"} 
+    %label Lunch
+    %input{:type => "radio", :name => "meal[meal_type]", :value => "lunch", :checked => @meal.meal_type == "lunch"}
+    %label Dinner
+    %input{:type => "radio", :name => "meal[meal_type]", :value => "dinner", :checked => @meal.meal_type == "dinner"}
+    %label Snack
+    %input{:type => "radio", :name => "meal[meal_type]", :value => "snack",  :checked => @meal.meal_type == "snack"}
+    %p
+    %label Meal Description
+    %input{:type => "text", :name => "meal[description]", :value => "#{@meal.description}"} 
+    %p
+    %label Ingredients
+    %input{:type => "text", :name => "ingredients[name]"}
+    
+    %p
+    %label Existing Ingredients
+    - Ingredient.all.each do |ingredient|
+        %input{:type => "checkbox", :name => "ingredients[ids][]", 
+        :value => "#{ingredient.id}", 
+        :checked => @meal.ingredients.include?(ingredient)} #{ingredient.name}
+    %p 
+    %input{:type => "submit", :value => "Submit Changes"}/

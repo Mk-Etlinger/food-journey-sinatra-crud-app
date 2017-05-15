@@ -2,19 +2,23 @@
     %h3 Add a meal
     %p
     %label Breakfast
-    %input{:type => "radio", :name => "meal[meal_type]", :value => "breakfast"}/ 
+    %input{:type => "radio", :name => "meal[meal_type]", :value => "breakfast"} 
     %label Lunch
-    %input{:type => "radio", :name => "meal[meal_type]"}/
+    %input{:type => "radio", :name => "meal[meal_type]", :value => "lunch"}
     %label Dinner
-    %input{:type => "radio", :name => "meal[meal_type]"}/
+    %input{:type => "radio", :name => "meal[meal_type]", :value => "dinner"}
     %label Snack
-    %input{:type => "radio", :name => "meal[meal_type]"}/
+    %input{:type => "radio", :name => "meal[meal_type]", :value => "snack"}
     %p
     %label Meal Description
     %input{:type => "text", :name => "meal[description]"}
     %p
     %label Ingredients
-    %input{:type => "text", :name => "ingredients[name][]"}
-
+    %input{:type => "text", :name => "ingredients[name]"}
+    
+    %p
+    %label Existing Ingredients
+    - Ingredient.all.each do |ingredient|
+        %input{:type => "checkbox", :name => "ingredients[ids][]", :value => "#{ingredient.id}"} #{ingredient.name}
     %p 
     %input{:type => "submit", :value => "Add Meal"}/
