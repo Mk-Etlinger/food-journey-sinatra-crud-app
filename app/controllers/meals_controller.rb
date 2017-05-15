@@ -51,19 +51,25 @@ class MealsController < ApplicationController
     elsif new_ingredients.empty? && !existing_ingredients.nil?
       @meal.ingredients = Ingredient.find(existing_ingredients)
     elsif !new_ingredients.include?(",") && !existing_ingredients.nil?
-      binding.pry
       @meal.ingredients = Ingredient.find(existing_ingredients)
       @meal.ingredients << Ingredient.create(name: new_ingredients)
     else
+      @meal.ingredients.clear
       new_ingredients.split(", ").each { |ing| @meal.ingredients << Ingredient.create(name: ing) } if new_ingredients.include?(",")
       
-      @meal.ingredients = Ingredient.create(name: new_ingredients) if !new_ingredients.include?(",")
+      @meal.ingredients << Ingredient.create(name: new_ingredients) if !new_ingredients.include?(",")
+      binding.pry
     end
     @meal.save
 
     redirect "dashboard/#{@meal.user.username}"
   end
   
-
+  get '/delete/:id' do 
+    binding.pry
+    @meal = Meal.find(params[:id]).destroy
+    redirect "dashboard/#{@meal.user.username}"
+  end
+  
 end
 
