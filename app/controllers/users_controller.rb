@@ -5,5 +5,9 @@ class UsersController < ApplicationController
     haml :'users/dashboard'
   end
   
+  get '/logout' do
 
+    haml :index
+  end
+  
 end
