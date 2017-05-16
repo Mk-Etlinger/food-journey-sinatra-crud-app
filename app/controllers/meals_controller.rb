@@ -2,12 +2,12 @@ class MealsController < ApplicationController
 
   get '/new' do
     redirect("/login") if !logged_in?(session)
-    @ingredients = Ingredient.all
+    @ingredients = Ingredient.all.sort_by { |ingredient| ingredient.name }
+    
     haml :'meals/new'
   end
   
   post '/new' do
-    binding.pry
     @meal = current_user.meals.build(params[:meal])
 
     new_ingredients = params[:ingredients][:name]
