@@ -15,7 +15,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    # redirect("/dashboard") if logged_in?(session)
+    redirect("/dashboard/#{current_user(session).username}") if logged_in?(session)
 
     haml :'registration/signup'
   end
