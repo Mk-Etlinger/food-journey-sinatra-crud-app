@@ -19,6 +19,6 @@
     %p
     %label Existing Ingredients
     - @ingredients.each do |ingredient|
-        %input{:type => "checkbox", :name => "ingredients[ids][]", :value => "#{ingredient.id}"} #{ingredient.name}
+        %input{:type => "checkbox", :name => "meal[ingredient_ids][]", :value => "#{ingredient.id}"} #{ingredient.name}
     %p 
     %input{:type => "submit", :value => "Add Meal"}/
