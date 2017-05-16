@@ -1,11 +1,11 @@
 %h1== Welcome #{@user.username}!
 
-- Meal.all.each do |meal|
+- @user.meals.all.each do |meal|
     -# == #{meal.date_time}
     %p= meal.description
-    %a{:href => "/edit/#{meal.id}"} edit
-    %a{:href => "/delete/#{meal.id}"} delete
+    %a{:href => url("/edit/#{meal.id}")} edit
+    %a{:href => url("/delete/#{meal.id}")} delete
 %p
-%a{:href => "/new"} Add a meal!
-
-%a{:href => "/logout"}logout
+%a{:href => url("/new")} Add a meal!
+%p
+%a{:href => url("/logout")}logout

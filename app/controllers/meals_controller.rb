@@ -66,7 +66,6 @@ class MealsController < ApplicationController
   end
   
   get '/delete/:id' do 
-    binding.pry
     @meal = Meal.find(params[:id]).destroy
     redirect "dashboard/#{@meal.user.username}"
   end
