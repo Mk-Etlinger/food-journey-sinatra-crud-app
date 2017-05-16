@@ -22,16 +22,18 @@ class MealsController < ApplicationController
   
   
   post '/new' do
+    binding.pry
     @meal = current_user.meals.build(params[:meal])
 
     new_ingredients = params[:ingredients][:name]
   
     if new_ingredients.include?(",") 
       @meal.parse_ingredients(new_ingredients)
-    else
+    elsif !new_ingredients.include?(",") && !new_ingredients.empty?
       @meal.ingredients << Ingredient.find_or_create_by(name: new_ingredients)
     end
     @meal.save
+    
     redirect "dashboard/#{@user.username}"
   end
 
@@ -54,27 +56,15 @@ class MealsController < ApplicationController
 
   patch '/edit' do
     @meal = Meal.find_by(description: params[:meal][:description])
+
     @meal.update(params[:meal])
-    binding.pry
+    
     new_ingredients = params[:ingredients][:name]
-    existing_ingredients = params[:ingredients][:ids]
    
-    if new_ingredients.include?(",") && !existing_ingredients.nil?
-      @meal.ingredients = Ingredient.find(existing_ingredients)
-      new_ingredients.split(", ").each do |ing|
-        @meal.ingredients << Ingredient.create(name: ing)
-      end
-    elsif new_ingredients.empty? && !existing_ingredients.nil?
-      @meal.ingredients = Ingredient.find(existing_ingredients)
-    elsif !new_ingredients.include?(",") && !existing_ingredients.nil?
-      @meal.ingredients = Ingredient.find(existing_ingredients)
-      @meal.ingredients << Ingredient.create(name: new_ingredients)
-    else
-      @meal.ingredients.clear
-      new_ingredients.split(", ").each { |ing| @meal.ingredients << Ingredient.create(name: ing) } if new_ingredients.include?(",")
-      
-      @meal.ingredients << Ingredient.create(name: new_ingredients) if !new_ingredients.include?(",")
-      binding.pry
+    if new_ingredients.include?(",")
+      @meal.parse_ingredients(new_ingredients)
+    elsif !new_ingredients.include?(",") && !new_ingredients.empty?
+      @meal.ingredients << Ingredient.find_or_create_by(name: new_ingredients)
     end
     @meal.save
 
@@ -94,7 +84,7 @@ class MealsController < ApplicationController
 
 
 
-  
+
   get '/delete/:id' do 
     redirect("/login") if !logged_in?(session)
     @meal = Meal.find(params[:id]).destroy
