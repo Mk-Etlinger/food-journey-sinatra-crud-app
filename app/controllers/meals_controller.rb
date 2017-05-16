@@ -1,7 +1,7 @@
 class MealsController < ApplicationController
 
   get '/new' do
-
+    @ingredients = Ingredient.all
     haml :'meals/new'
   end
 
@@ -32,7 +32,7 @@ class MealsController < ApplicationController
 
   get '/edit/:id' do
     @meal = Meal.find(params[:id])
-    
+    @ingredients = Ingredient.all
     haml :'meals/edit'
   end
 
@@ -68,6 +68,11 @@ class MealsController < ApplicationController
   get '/delete/:id' do 
     @meal = Meal.find(params[:id]).destroy
     redirect "dashboard/#{@meal.user.username}"
+  end
+
+  get '/meal/:id' do 
+    @meal = Meal.find(params[:id])
+    haml :'meals/show'
   end
   
 end

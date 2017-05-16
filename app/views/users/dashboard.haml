@@ -2,7 +2,9 @@
 
 - @user.meals.all.each do |meal|
     -# == #{meal.date_time}
-    %p= meal.description
+    %p 
+    %a{:href => url("/meal/#{meal.id}")} #{meal.description}
+    %p 
     %a{:href => url("/edit/#{meal.id}")} edit
     %a{:href => url("/delete/#{meal.id}")} delete
 %p

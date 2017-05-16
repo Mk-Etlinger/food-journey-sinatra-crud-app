@@ -20,7 +20,7 @@
     
     %p
     %label Existing Ingredients
-    - Ingredient.all.each do |ingredient|
+    - @ingredients.each do |ingredient|
         %input{:type => "checkbox", :name => "ingredients[ids][]", 
         :value => "#{ingredient.id}", 
         :checked => @meal.ingredients.include?(ingredient)} #{ingredient.name}

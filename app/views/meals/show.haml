@@ -1,0 +1,3 @@
+%h2= @meal.description
+- @meal.ingredients.each do |ingredient|
+    %p= ingredient.name
