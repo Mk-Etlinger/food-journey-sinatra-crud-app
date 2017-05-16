@@ -58,7 +58,7 @@ class ApplicationController < Sinatra::Base
     end
     
     def current_user(session)
-        User.find(session[:id]) if session[:id]
+      @user ||= User.find(session[:id])
     end
     
   end
