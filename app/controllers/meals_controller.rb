@@ -5,21 +5,6 @@ class MealsController < ApplicationController
     @ingredients = Ingredient.all
     haml :'meals/new'
   end
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   post '/new' do
     binding.pry
@@ -37,16 +22,6 @@ class MealsController < ApplicationController
     redirect "dashboard/#{@user.username}"
   end
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   get '/edit/:id' do
     redirect("/login") if !logged_in?(session)
     @meal = Meal.find(params[:id])
@@ -70,20 +45,6 @@ class MealsController < ApplicationController
 
     redirect "dashboard/#{@meal.user.username}"
   end
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   get '/delete/:id' do 
     redirect("/login") if !logged_in?(session)
