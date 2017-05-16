@@ -27,16 +27,9 @@ class MealsController < ApplicationController
     new_ingredients = params[:ingredients][:name]
   
     if new_ingredients.include?(",") 
-      #call the instance method in the meal class
-      new_ingredients.split(",").each do |ing|
-        @meal.ingredients << Ingredient.create(name: ing)
-      end
-    elsif !new_ingredients.include?(",")
-      @meal.ingredients << Ingredient.create(name: new_ingredients)
+      @meal.parse_ingredients(new_ingredients)
     else
-      new_ingredients.split(", ").each { |ing| @meal.ingredients << Ingredient.create(name: ing) } if new_ingredients.include?(",")
-      
-      @meal.ingredients << Ingredient.create(name: new_ingredients) if !new_ingredients.include?(",")
+      @meal.ingredients << Ingredient.find_or_create_by(name: new_ingredients)
     end
     @meal.save
     redirect "dashboard/#{@user.username}"
@@ -62,7 +55,7 @@ class MealsController < ApplicationController
   patch '/edit' do
     @meal = Meal.find_by(description: params[:meal][:description])
     @meal.update(params[:meal])
-
+    binding.pry
     new_ingredients = params[:ingredients][:name]
     existing_ingredients = params[:ingredients][:ids]
    
@@ -87,6 +80,20 @@ class MealsController < ApplicationController
 
     redirect "dashboard/#{@meal.user.username}"
   end
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   get '/delete/:id' do 
     redirect("/login") if !logged_in?(session)
