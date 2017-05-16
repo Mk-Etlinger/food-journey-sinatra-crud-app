@@ -1,6 +1,7 @@
 class MealsController < ApplicationController
 
   get '/new' do
+    redirect("/login") if !logged_in?(session)
     @ingredients = Ingredient.all
     haml :'meals/new'
   end
@@ -31,6 +32,7 @@ class MealsController < ApplicationController
   end
 
   get '/edit/:id' do
+    redirect("/login") if !logged_in?(session)
     @meal = Meal.find(params[:id])
     @ingredients = Ingredient.all
     haml :'meals/edit'
@@ -66,11 +68,13 @@ class MealsController < ApplicationController
   end
   
   get '/delete/:id' do 
+    redirect("/login") if !logged_in?(session)
     @meal = Meal.find(params[:id]).destroy
     redirect "dashboard/#{@meal.user.username}"
   end
 
   get '/meal/:id' do 
+    redirect("/login") if !logged_in?(session)
     @meal = Meal.find(params[:id])
     haml :'meals/show'
   end
