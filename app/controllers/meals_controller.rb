@@ -6,22 +6,33 @@ class MealsController < ApplicationController
     haml :'meals/new'
   end
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   post '/new' do
-    @meal = Meal.create(params[:meal])
-    @user = User.find(session[:id])
-    @meal.user_id = @user.id
+    @meal = current_user.meals.build(params[:meal])
+
     new_ingredients = params[:ingredients][:name]
-    existing_ingredients = params[:ingredients][:ids]
-   
-    if new_ingredients.include?(",") && !existing_ingredients.nil?
-      new_ingredients.split(", ").each do |ing|
-        @meal.ingredients << Ingredient.create(name: ing) && Ingredient.find(existing_ingredients)
+  
+    if new_ingredients.include?(",") 
+      #call the instance method in the meal class
+      new_ingredients.split(",").each do |ing|
+        @meal.ingredients << Ingredient.create(name: ing)
       end
-    elsif new_ingredients.empty? && !existing_ingredients.nil?
-      @meal.ingredients << Ingredient.find(existing_ingredients)
-    elsif !new_ingredients.include?(",") && !existing_ingredients.nil?
+    elsif !new_ingredients.include?(",")
       @meal.ingredients << Ingredient.create(name: new_ingredients)
-      @meal.ingredients << Ingredient.find(existing_ingredients)
     else
       new_ingredients.split(", ").each { |ing| @meal.ingredients << Ingredient.create(name: ing) } if new_ingredients.include?(",")
       
@@ -31,6 +42,16 @@ class MealsController < ApplicationController
     redirect "dashboard/#{@user.username}"
   end
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   get '/edit/:id' do
     redirect("/login") if !logged_in?(session)
     @meal = Meal.find(params[:id])
