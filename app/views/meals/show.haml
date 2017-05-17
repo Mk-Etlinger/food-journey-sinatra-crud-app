@@ -1,3 +1,7 @@
-%h2= @meal.description
-- @meal.ingredients.each do |ingredient|
-    %p= ingredient.name
+%h2.title= @meal.description
+#show_box
+    %div
+        - @meal.ingredients.each do |ingredient|    
+            %p= ingredient.name
+%p 
+    %a{:class => "button", :href => url("/dashboard/#{@meal.user.username}")} Back 
