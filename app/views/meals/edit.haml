@@ -1,7 +1,7 @@
+%h3.title Edit a meal
+
 %form{:action => "/edit", :method => "POST"}
     %input{:name => "_method", :type => "hidden", :value => "patch"}/
-
-    %h3 Edit a meal
     %p
     %label Breakfast
     %input{:type => "radio", :name => "meal[meal_type]", :value => "breakfast", :checked => @meal.meal_type == "breakfast"} 
