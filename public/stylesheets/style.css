@@ -1,0 +1,90 @@
+* {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 200; 
+}
+
+body {
+    text-align: left;
+    padding-left: 20%;
+    background-color: #e1eef7;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 3.5em
+}
+
+h2 {
+    font-weight: normal;
+    font-size: 3em
+}
+
+h3 {
+    font-size: 2em
+}
+
+p {
+    margin: 5px;
+    padding: 5px;
+}
+
+label {
+    letter-spacing: 1px;
+}
+
+a {
+    margin: 5px;
+    padding: 5px;
+}
+
+input {
+    background-color: white;
+}
+
+.dash_link_small {
+    font-size: .5em;
+}
+
+#dash_box h3 {
+    background-color: white;
+    border: 3px groove #ddd;
+    margin: 10px;
+    width: 60%;
+}
+
+.title {
+    margin-left: 15%;
+    margin-right: 30%;
+}
+
+h3.meal_link a {
+    font-weight: 100;
+}
+
+address { 
+    background-color: grey;
+    text-align: center;
+    color: white;
+    margin-top: 100px;
+}
+
+p a.button {
+    text-decoration: none;
+    border: 1px outset grey;
+    background-color: lightgrey;
+}
+
+form {
+    background-color: white;
+    padding: 20px;
+    border: 3px groove #ddd;
+    margin: 10px;
+    width: 60%;
+}
+
+#show_box div {
+    background-color: white;
+    border: 3px groove #ddd;
+    margin: 10px;
+    width: 60%;
+}
