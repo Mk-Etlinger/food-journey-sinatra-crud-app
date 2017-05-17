@@ -1,13 +1,14 @@
-%h1== Welcome #{@user.username}!
+%h1.title Welcome #{@user.username}!
 
 - @user.meals.all.each do |meal|
-    -# == #{meal.date_time}
-    %p 
-    %a{:href => url("/meal/#{meal.id}")} #{meal.description}
-    %p 
-    %a{:href => url("/edit/#{meal.id}")} edit
-    %a{:href => url("/delete/#{meal.id}")} delete
+    #dash_box    
+        %h3.meal_link
+            %a{:href => url("/meal/#{meal.id}")} #{meal.description}
+            #dashboard 
+                %a{:class => "dash_link_small", :href => url("/edit/#{meal.id}")} edit
+                %a{:class => "dash_link_small", :href => url("/delete/#{meal.id}")} delete
 %p
-%a{:href => url("/new")} Add a meal!
+    %a{:class => "button", :href => url("/new")} Add a meal!
 %p
-%a{:href => url("/logout")}logout
+    %a{:href => url("/logout")}logout
+
