@@ -12,6 +12,8 @@
             -if logged_in?
                 %a(href="/dashboard/#{current_user.username}")
                     %li Dashboard
+                %a(href="/logout")
+                    %li Log out
     = yield
     %footer
         %address &#169; Mike Etlinger 2017
