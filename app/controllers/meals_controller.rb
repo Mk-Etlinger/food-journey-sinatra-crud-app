@@ -1,7 +1,7 @@
 class MealsController < ApplicationController
 
   get '/new' do
-    redirect("/login") if !logged_in?(session)
+    authenticate_user
     @ingredients = Ingredient.all.sort_by { |ingredient| ingredient.name }
     
     haml :'meals/new'
@@ -19,19 +19,23 @@ class MealsController < ApplicationController
     end
     @meal.save
     
-    redirect "dashboard/#{@user.username}"
+    redirect_to_dashboard
   end
 
   get '/edit/:id' do
-    redirect("/login") if !logged_in?(session)
+    authenticate_user
     @meal = Meal.find(params[:id])
-    @ingredients = Ingredient.all
-    haml :'meals/edit'
+    @ingredients = Ingredient.all.sort_by { |ingredient| ingredient.name }
+    
+    if current_user == @meal.user
+      haml :'meals/edit'
+    else
+      redirect_to_dashboard
+    end 
   end
 
   patch '/edit' do
     @meal = Meal.find_by(description: params[:meal][:description])
-
     @meal.update(params[:meal])
     
     new_ingredients = params[:ingredients][:name]
@@ -47,13 +51,13 @@ class MealsController < ApplicationController
   end
 
   get '/delete/:id' do 
-    redirect("/login") if !logged_in?(session)
+    authenticate_user
     @meal = Meal.find(params[:id]).destroy
     redirect "dashboard/#{@meal.user.username}"
   end
 
   get '/meal/:id' do 
-    redirect("/login") if !logged_in?(session)
+    authenticate_user
     @meal = Meal.find(params[:id])
     haml :'meals/show'
   end
