@@ -5,6 +5,7 @@ class Meal < ActiveRecord::Base
 	has_many :ingredients, through: :meal_ingredients
 
 	validates_presence_of :meal_type, :description
+	validates :description, length: { maximum: 30 }
 
 	def parse_ingredients(new_ingredients)
     new_ingredients.split(",").each do |ingredient|
