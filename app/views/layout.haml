@@ -5,6 +5,13 @@
         %link{:href => "/stylesheets/style.css", :rel => "stylesheet", :type => "text/css"}/
     %title 
     %body
-        = yield
+    #nav
+        %ul
+            %a(href="/")
+                %li Home
+            -if logged_in?
+                %a(href="/dashboard/#{current_user.username}")
+                    %li Dashboard
+    = yield
     %footer
         %address &#169; Mike Etlinger 2017
