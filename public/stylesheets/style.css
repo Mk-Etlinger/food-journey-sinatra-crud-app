@@ -6,7 +6,7 @@
 #nav {
     background-color: black;
     width: 100%;
-    border: 1px groove black;
+    border: 1px outset black;
 }
 
 #nav ul a {
@@ -89,7 +89,7 @@ h3.meal_link a {
 }
 
 address { 
-    background-color: grey;
+    background-color: #484a4c;
     text-align: center;
     color: white;
     margin-top: 100px;
