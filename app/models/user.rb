@@ -6,13 +6,7 @@ class User < ActiveRecord::Base
     validates :email, uniqueness: true
     validates :username, format: { with: /\A[a-zA-Z]+\z/,
     message: "only allows letters" }
+    validates :password, length: { in: 6..20 }
+    validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
 
-    def slug
-        self.username.gsub(" ", "-")    
-    end
-
-    def self.find_by_slug(slug)
-        username = slug.gsub("-", " ")
-        self.find_by(username: username)
-    end
 end
