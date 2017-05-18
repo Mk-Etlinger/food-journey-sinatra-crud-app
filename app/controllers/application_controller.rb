@@ -1,6 +1,8 @@
 require './config/environment'
+require 'rack-flash'
 
-class ApplicationController < Sinatra::Base
+class ApplicationController < Sinatra::Base 
+  use Rack::Flash
 
   configure do
     enable :sessions
@@ -15,17 +17,19 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    redirect("/dashboard/#{current_user.username}") if logged_in?(session)
 
     haml :'registration/signup'
   end
   
   post '/signup' do
-    @user = User.new(params)
-    if @user.save
+    binding.pry
+    @user = User.new(params) unless user_exists?
+
+    if @user&.save
       session[:id] = @user.id
-      redirect "/dashboard/#{@user.username}"
+      redirect_to_dashboard
     else
+      # flash[:notice] = "Invalid username or password"
       redirect "/signup"
     end
     
@@ -40,7 +44,7 @@ class ApplicationController < Sinatra::Base
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       session[:id] = @user.id
-      redirect "/dashboard/#{@user.username}"
+      redirect_to_dashboard
     else
       redirect "/login"
     end
@@ -52,17 +56,32 @@ class ApplicationController < Sinatra::Base
   end
 
   helpers do
-    def logged_in?(session)
+    def logged_in?
       !!session[:id]
     end
     
     def current_user
       @user ||= User.find(session[:id])
     end
+
+    def authenticate_user
+      redirect("/login") if !logged_in?
+    end
+
+    def redirect_to_dashboard
+      redirect "/dashboard/#{current_user.username}"
+    end
     
+    def user_exists?
+     User.where("username = ? OR email = ?", params[:username], params[:email])
+    end
+    
+
   end
 
   
 
 
 end
+
+
