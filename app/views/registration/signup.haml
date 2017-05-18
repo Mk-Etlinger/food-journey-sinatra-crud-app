@@ -1,6 +1,6 @@
 %h2.title Sign Up!
-- if flash.has?(:message)
-    = flash[:message]
+- if flash.has?(:error)
+    = flash[:error][0]
 %form{:action => "/signup", :method => "POST"}
 
     %p
