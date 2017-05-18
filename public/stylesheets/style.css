@@ -3,6 +3,18 @@
     font-weight: 200; 
 }
 
+#nav {
+    background-color: black;
+    width: 100%;
+    border: 1px groove black;
+}
+
+#nav ul a {
+    display: inline-block;
+    color: white;
+    list-style-type: none;
+}
+
 body {
     text-align: left;
     padding-left: 20%;
