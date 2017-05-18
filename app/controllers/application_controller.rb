@@ -2,13 +2,13 @@ require './config/environment'
 require 'rack-flash'
 
 class ApplicationController < Sinatra::Base 
-  use Rack::Flash
 
   configure do
     enable :sessions
     set :public_folder, 'public'
     set :views, 'app/views'
     set :session_secret, "food_journey"
+    use Rack::Flash, :sweep => true
   end
 
   get '/' do
@@ -22,14 +22,13 @@ class ApplicationController < Sinatra::Base
   end
   
   post '/signup' do
-    binding.pry
     @user = User.new(params) unless user_exists?
 
     if @user&.save
       session[:id] = @user.id
       redirect_to_dashboard
     else
-      # flash[:notice] = "Invalid username or password"
+      flash[:message] = "username or email already exists"
       redirect "/signup"
     end
     

@@ -1,6 +1,8 @@
 %h2.title Sign Up!
-
+- if flash.has?(:message)
+    = flash[:message]
 %form{:action => "/signup", :method => "POST"}
+
     %p
     %label Username:
     %input{:type => "text", :name => "username"}/ 
