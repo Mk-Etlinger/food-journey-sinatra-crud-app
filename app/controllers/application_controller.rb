@@ -28,7 +28,7 @@ class ApplicationController < Sinatra::Base
       session[:id] = @user.id
       redirect_to_dashboard
     else
-      flash[:error] = @user.errors.full_messages if !@user.errors.full_messages.nil?
+      flash[:error] = @user.errors.full_messages
       redirect "/signup"
     end
     
