@@ -22,13 +22,14 @@ class ApplicationController < Sinatra::Base
   end
   
   post '/signup' do
-    @user = User.new(params) unless user_exists?
-
-    if @user&.save
+    @user = User.new(params)
+    
+    if @user.save
       session[:id] = @user.id
       redirect_to_dashboard
     else
       flash[:message] = "username or email already exists"
+      flash[:error] = @user.errors.full_messages if !@user.errors.full_messages.nil?
       redirect "/signup"
     end
     
@@ -70,11 +71,6 @@ class ApplicationController < Sinatra::Base
     def redirect_to_dashboard
       redirect "/dashboard/#{current_user.username}"
     end
-    
-    def user_exists?
-     User.where("username = ? OR email = ?", params[:username], params[:email])
-    end
-    
 
   end
 
