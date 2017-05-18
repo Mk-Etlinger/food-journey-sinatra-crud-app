@@ -19,7 +19,7 @@ class MealsController < ApplicationController
     end
     @meal.save 
     flash[:error] = @meal.errors.full_messages
-    binding.pry
+    
     
     if @meal.errors.any?
       redirect('/new')
