@@ -17,9 +17,15 @@ class MealsController < ApplicationController
     elsif !new_ingredients.include?(",") && !new_ingredients.empty?
       @meal.ingredients << Ingredient.find_or_create_by(name: new_ingredients)
     end
-    @meal.save
+    @meal.save 
+    flash[:error] = @meal.errors.full_messages
+    binding.pry
     
-    redirect_to_dashboard
+    if @meal.errors.any?
+      redirect('/new')
+    else  
+      redirect_to_dashboard
+    end
   end
 
   get '/edit/:id' do
