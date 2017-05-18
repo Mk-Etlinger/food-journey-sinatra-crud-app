@@ -1,5 +1,6 @@
 %h3.title Add a meal
-
+- if flash.has?(:error)
+    = flash[:error][0]
 %form{:action => "/new", :method => "POST"}
     
     %p
