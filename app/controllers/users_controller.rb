@@ -1,9 +1,13 @@
 class UsersController < ApplicationController
 
   get '/dashboard/:user' do
-    redirect("/login") if !logged_in?(session)
-    @user = User.find_by(username: params[:user])
-    haml :'users/dashboard'
+    authenticate_user
+    
+    if current_user.username == params[:user]
+      haml :'users/dashboard'
+    else
+      redirect_to_dashboard
+    end
   end
   
   get '/logout' do
