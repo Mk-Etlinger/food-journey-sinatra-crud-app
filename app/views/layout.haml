@@ -8,7 +8,7 @@
     #nav
         %ul
             %a(href="/")
-                %li Home
+                %image{ :src => '../images/food_journey_white.png' }
             -if logged_in?
                 %a(href="/dashboard/#{current_user.username}")
                     %li Dashboard
@@ -16,4 +16,6 @@
                     %li Log out
     = yield
     %footer
-        %address &#169; Mike Etlinger 2017
+        %address 
+            #copyright
+                &#169; MMedia 2017

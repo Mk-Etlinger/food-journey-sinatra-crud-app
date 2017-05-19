@@ -3,14 +3,14 @@
 %form{:action => "/edit", :method => "POST"}
     %input{:name => "_method", :type => "hidden", :value => "patch"}/
     %p
-    %label Breakfast
-    %input{:type => "radio", :name => "meal[meal_type]", :value => "breakfast", :checked => @meal.meal_type == "breakfast"} 
-    %label Lunch
-    %input{:type => "radio", :name => "meal[meal_type]", :value => "lunch", :checked => @meal.meal_type == "lunch"}
-    %label Dinner
-    %input{:type => "radio", :name => "meal[meal_type]", :value => "dinner", :checked => @meal.meal_type == "dinner"}
-    %label Snack
-    %input{:type => "radio", :name => "meal[meal_type]", :value => "snack",  :checked => @meal.meal_type == "snack"}
+    %input#radio1{:name => "meal[meal_type]", :type => "radio", :value => "breakfast", :checked => @meal.meal_type == "breakfast"}/
+    %label{:for => "radio1"} Breakfast
+    %input#radio2{:name => "meal[meal_type]", :type => "radio", :value => "lunch", :checked => @meal.meal_type == "lunch"}/
+    %label{:for => "radio2"} Lunch
+    %input#radio3{:name => "meal[meal_type]", :type => "radio", :value => "dinner", :checked => @meal.meal_type == "dinner"}/
+    %label{:for => "radio3"} Dinner
+    %input#radio4{:name => "meal[meal_type]", :type => "radio", :value => "snack", :checked => @meal.meal_type == "snack"}/
+    %label{:for => "radio4"} Snack
     %p
     %label Meal Description
     %input{:type => "text", :name => "meal[description]", :value => "#{@meal.description}"} 
