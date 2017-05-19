@@ -13,6 +13,11 @@ gem 'bcrypt'
 gem 'tux'
 gem 'haml'
 gem 'rack-flash3'
+gem 'guard'
+
+group :development do
+  gem 'guard-shotgun', :git => 'https://github.com/rchampourlier/guard-shotgun.git'
+end
 
 group :test do
   gem 'rspec'
