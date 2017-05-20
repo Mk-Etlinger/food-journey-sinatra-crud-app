@@ -35,11 +35,12 @@ class ApplicationController < Sinatra::Base
   end
   
   get '/login' do
-    
+    redirect_to_dashboard if logged_in?
     haml :login
   end
 
   post '/login' do
+
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       session[:id] = @user.id
