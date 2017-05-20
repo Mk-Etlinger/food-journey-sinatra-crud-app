@@ -11,7 +11,7 @@ gem 'bcrypt'
 gem 'haml'
 gem 'rack-flash3'
 gem 'guard'
-gem 'pg'
+gem 'pg' :group => :production
 
 group :development do
   gem 'guard-shotgun', :git => 'https://github.com/rchampourlier/guard-shotgun.git'
