@@ -4,7 +4,7 @@ class Ingredient < ActiveRecord::Base
   has_many :meals, through: :meal_ingredients
 
   validates_presence_of :name
-  validates :name, format: { with: /\A[a-zA-Z,]+\z/ }
+  validates :name, format: { with: /[a-zA-Z,]/ }
 
   def self.parse_ingredients(new_ingredients)
     binding.pry
