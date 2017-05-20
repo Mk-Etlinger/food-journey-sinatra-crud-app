@@ -1,22 +1,24 @@
 source 'http://rubygems.org'
+ruby '2.3.4'
 
 gem 'sinatra'
 gem 'activerecord', :require => 'active_record'
 gem 'sinatra-activerecord', :require => 'sinatra/activerecord'
 gem 'rake'
 gem 'require_all'
-gem 'sqlite3'
 gem 'thin'
-gem 'shotgun'
-gem 'pry'
 gem 'bcrypt'
-gem 'tux'
 gem 'haml'
 gem 'rack-flash3'
 gem 'guard'
+gem 'pg'
 
 group :development do
   gem 'guard-shotgun', :git => 'https://github.com/rchampourlier/guard-shotgun.git'
+  gem 'sqlite3'
+  gem 'tux'
+  gem 'pry'
+  gem 'shotgun'
 end
 
 group :test do

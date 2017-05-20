@@ -77,6 +77,7 @@ GEM
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    pg (0.20.0)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -160,6 +161,7 @@ DEPENDENCIES
   guard
   guard-shotgun!
   haml
+  pg
   pry
   rack-flash3
   rack-test
@@ -173,5 +175,8 @@ DEPENDENCIES
   thin
   tux
 
+RUBY VERSION
+   ruby 2.3.4p301
+
 BUNDLED WITH
-   1.14.6
+   1.15.0

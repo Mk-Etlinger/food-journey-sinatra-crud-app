@@ -1,0 +1,19 @@
+development:
+  adapter: postgresql
+  database: food_journey_development
+  pool: 5
+  timeout: 5000
+  template: template0
+test:
+  adapter: postgresql
+  database: food_journey_test
+  pool: 5
+  timeout: 5000
+  template: template0
+
+production:
+  adapter: postgresql
+  database: food_journey_production
+  pool: 5
+  timeout: 5000
+  template: template0
