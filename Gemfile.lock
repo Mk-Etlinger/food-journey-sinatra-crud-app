@@ -156,6 +156,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord
   bcrypt
+  bundler (~> 1.15.0.pre.3)
   capybara
   database_cleaner!
   guard
