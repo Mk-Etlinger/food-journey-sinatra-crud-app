@@ -12,7 +12,7 @@ gem 'haml'
 gem 'rack-flash3'
 gem 'guard'
 gem 'pg', :group => :production
-gem 'bundler', '~> 1.15.0.pre.3'
+gem 'bundler', '~> 1.13', '>= 1.13.7'
 
 group :development do
   gem 'guard-shotgun', :git => 'https://github.com/rchampourlier/guard-shotgun.git'
