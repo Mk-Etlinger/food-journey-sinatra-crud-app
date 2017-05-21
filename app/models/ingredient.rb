@@ -6,10 +6,5 @@ class Ingredient < ActiveRecord::Base
   validates_presence_of :name
   validates :name, format: { with: /[a-zA-Z,]/ }
 
-  def self.parse_ingredients(new_ingredients)
-    binding.pry
-    new_ingredients.split(",").each do |ingredient|
-      @meal.ingredients << self.find_or_create_by(name: ingredient.strip)
-    end
-  end
+  
 end
