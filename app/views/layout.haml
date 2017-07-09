@@ -1,14 +1,14 @@
 !!!
 %html 
     %head
-        %link{:href => "https://fonts.googleapis.com/css?family=Oswald:200,400", :rel => "stylesheet", :type => "text/css"}/
-        %link{:href => "/stylesheets/style.css", :rel => "stylesheet", :type => "text/css"}/
+        %link{ href: "https://fonts.googleapis.com/css?family=Oswald:200,400", rel: "stylesheet", type: "text/css" }/
+        %link{ href: "/stylesheets/style.css", rel: "stylesheet", type: "text/css" }/
     %title 
     %body
     #nav
         %ul
             %a(href="/")
-                %image{ :src => '../images/food_journey_white.png' }
+                %image{ src: '../images/food_journey_white.png' }
             -if logged_in?
                 %a(href="/dashboard/#{current_user.username}")
                     %li Dashboard

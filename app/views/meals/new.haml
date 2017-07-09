@@ -1,30 +1,30 @@
 %h3.title Add a meal
 - if flash.has?(:error)
     = flash[:error][0]
-%form{:action => "/new", :method => "POST"}
+%form{ action: "/new", method: "POST" }
     #new
         %p
-        %input#radio1{:checked => "checked", :name => "meal[meal_type]", :type => "radio", :value => "breakfast"}/
-        %label{:for => "radio1"} Breakfast
-        %input#radio2{:name => "meal[meal_type]", :type => "radio", :value => "lunch"}/
-        %label{:for => "radio2"} Lunch
-        %input#radio3{:name => "meal[meal_type]", :type => "radio", :value => "dinner"}/
-        %label{:for => "radio3"} Dinner
-        %input#radio4{:name => "meal[meal_type]", :type => "radio", :value => "snack"}/
-        %label{:for => "radio4"} Snack
+        %input#radio1{ checked: "checked", name: "meal[meal_type]", type: "radio", value: "breakfast" }/
+        %label{ for: "radio1" } Breakfast
+        %input#radio2{ name: "meal[meal_type]", type: "radio", value: "lunch" }/
+        %label{ for: "radio2" } Lunch
+        %input#radio3{ name: "meal[meal_type]", type: "radio", value: "dinner" }/
+        %label{ for: "radio3" } Dinner
+        %input#radio4{ name: "meal[meal_type]", type: "radio", value: "snack" }/
+        %label{ for: "radio4" } Snack
         %p
     %label Meal Description:
-    %input{:type => "text", :name => "meal[description]", :placeholder => "e.g. Omellete"}
+    %input{ type: "text", name: "meal[description]", placeholder: "e.g. Omellete" }
     %p
     %label Ingredients:
-    %input{:type => "text", :name => "ingredients[name]", :placeholder => "e.g. egg, ham, cheese"}
+    %input{ type: "text", name: "ingredients[name]", placeholder: "e.g. egg, ham, cheese" }
 
     %p
     %label Existing Ingredients:
     - @ingredients.each do |ingredient|
-        %input{:type => "checkbox", :name => "meal[ingredient_ids][]", :value => "#{ingredient.id}"} #{ingredient.name}
+        %input{type: "checkbox", name: "meal[ingredient_ids][]", value: "#{ingredient.id}"} #{ingredient.name}
     %p 
-    %input{:type => "submit", :value => "Add Meal"}/
+    %input{type: "submit", value: "Add Meal"}/
 
 
 

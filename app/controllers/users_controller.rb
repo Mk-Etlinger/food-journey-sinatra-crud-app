@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
-
   get '/dashboard/:user' do
     authenticate_user
-    
+
     if current_user.username == params[:user]
       haml :'users/dashboard'
     else
@@ -13,20 +12,19 @@ class UsersController < ApplicationController
   get '/signup' do
     haml :'registration/signup'
   end
-  
+
   post '/signup' do
     @user = User.new(params)
-    
+
     if @user.save
       session[:id] = @user.id
       redirect_to_dashboard
     else
       flash[:error] = @user.errors.full_messages
-      redirect "/signup"
+      redirect '/signup'
     end
-    
   end
-  
+
   get '/login' do
     redirect_to_dashboard if logged_in?
     haml :login
@@ -38,19 +36,18 @@ class UsersController < ApplicationController
       session[:id] = @user.id
       redirect_to_dashboard
     else
-      redirect "/login"
+      redirect '/login'
     end
   end
 
   get '/logout' do
     session.clear
-    redirect "/login"
+    redirect '/login'
   end
-  
+
   get '/logout' do
     session.clear
     redirect '/'
     haml :index
   end
-  
 end

@@ -4,4 +4,4 @@
         - @meal.ingredients.each do |ingredient|    
             %p= ingredient.name
 %p 
-    %a{:class => "button", :href => url("/dashboard/#{@meal.user.username}")} Back 
+    %a{ class: "button", href: url("/dashboard/#{@meal.user.username}") } Back
