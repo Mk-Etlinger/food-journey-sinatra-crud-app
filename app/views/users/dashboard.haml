@@ -3,7 +3,7 @@
 - @user.meals.all.each do |meal|
     #dash_box    
         %h3.meal_link
-            %a{:href => url("/meal/#{meal.id}")} #{meal.description}
+            %a{:href => url("/meal/#{meal.id}")} #{meal.meal_type + '-' + meal.description}
             #dashboard 
                 %a{:class => "dash_link_small", :href => url("/edit/#{meal.id}")} edit
                 %a{:class => "dash_link_small", :href => url("/delete/#{meal.id}")} delete
