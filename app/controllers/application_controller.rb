@@ -21,7 +21,7 @@ class ApplicationController < Sinatra::Base
     end
     
     def current_user
-      @user ||= User.find(session[:id])
+      @user ||= User.find_by(id: session[:id])
     end
 
     def authenticate_user
@@ -32,9 +32,6 @@ class ApplicationController < Sinatra::Base
       redirect "/dashboard/#{current_user.username}"
     end
   end
-
-  
-
 
 end
 
