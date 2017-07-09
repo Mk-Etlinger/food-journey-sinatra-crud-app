@@ -1,3 +1,5 @@
+require 'pry'
+
 class MealsController < ApplicationController
 
   get '/new' do
@@ -19,7 +21,6 @@ class MealsController < ApplicationController
     end
     @meal.save 
     flash[:error] = @meal.errors.full_messages
-    
     
     if @meal.errors.any?
       redirect('/new')
@@ -65,6 +66,7 @@ class MealsController < ApplicationController
   get '/meal/:id' do 
     authenticate_user
     @meal = Meal.find(params[:id])
+    
     haml :'meals/show'
   end
   
