@@ -20,6 +20,7 @@ group :development do
   gem 'tux'
   gem 'pry'
   gem 'shotgun'
+  gem 'haml-lint', require: false
 end
 
 group :test do
