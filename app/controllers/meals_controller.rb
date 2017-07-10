@@ -1,14 +1,19 @@
 require 'pry'
 
 class MealsController < ApplicationController
-  get '/new' do
-    authenticate_user
+  ['/meals/new', '/meal/edit/*', '/meal/*', '/meal/delete/*'].each do |path|
+    before path do
+      authenticate_user
+    end
+  end
+
+  get '/meals/new' do
     @ingredients = Ingredient.all.sort_by(&:name)
 
     haml :'meals/new'
   end
 
-  post '/new' do
+  post 'meals/new' do
     @meal = current_user.meals.build(params[:meal])
 
     new_ingredients = params[:ingredients][:name]
@@ -22,14 +27,13 @@ class MealsController < ApplicationController
     flash[:error] = @meal.errors.full_messages
 
     if @meal.errors.any?
-      redirect('/new')
+      redirect('/meals/new')
     else
       redirect_to_dashboard
     end
   end
 
-  get '/edit/:id' do
-    authenticate_user
+  get '/meal/edit/:id' do
     @meal = Meal.find(params[:id])
     @ingredients = Ingredient.all.sort_by(&:name)
 
@@ -56,16 +60,18 @@ class MealsController < ApplicationController
     redirect "dashboard/#{@meal.user.username}"
   end
 
-  get '/delete/:id' do
-    authenticate_user
+  get '/meal/delete/:id' do
     @meal = Meal.find(params[:id]).destroy
     redirect "dashboard/#{@meal.user.username}"
   end
 
   get '/meal/:id' do
-    authenticate_user
     @meal = Meal.find(params[:id])
 
     haml :'meals/show'
   end
+
+  helpers do
+    
+  end 
 end
