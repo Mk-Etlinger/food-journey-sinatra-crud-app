@@ -5,6 +5,5 @@ class Ingredient < ActiveRecord::Base
 
   validates_presence_of :name
   validates :name, format: { with: /[a-zA-Z,]/ }
-
   
 end
