@@ -13,7 +13,7 @@ class MealsController < ApplicationController
     haml :'meals/new'
   end
 
-  post 'meals/new' do
+  post '/meals/new' do
     @meal = current_user.meals.build(params[:meal])
 
     new_ingredients = params[:ingredients][:name]
@@ -72,6 +72,9 @@ class MealsController < ApplicationController
   end
 
   helpers do
-    
+    def set_meal
+      @meal = Meal.find_by(id: params[:id]).destroy
+    end
+      
   end 
 end
