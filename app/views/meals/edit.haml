@@ -1,6 +1,6 @@
 %h3.title Edit a meal
 
-%form{ action: "/edit", method: "POST" }
+%form{ action: "/meals/edit/#{@meal.id}", method: "POST" }
     %input{ name: "_method", type: "hidden", value: "patch" }/
     %p
     %input#radio1{ name: "meal[meal_type]", type: "radio", value: "breakfast", checked: @meal.meal_type == "breakfast" }/

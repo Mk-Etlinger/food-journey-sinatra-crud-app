@@ -1,6 +1,4 @@
 %h2.title Sign Up!
-- if flash.has?(:error)
-    = flash[:error][0]
 %form{ action: "/signup", method: "POST" }
 
     %p
@@ -14,4 +12,3 @@
     %input{ type: "text", name: "email" }/
     %p
     %input{ type: "submit", value: "Sign Up" }/
-
