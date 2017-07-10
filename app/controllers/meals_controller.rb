@@ -8,30 +8,28 @@ class MealsController < ApplicationController
   end
 
   get '/meals/new' do
-    @ingredients = Ingredient.all.sort_by(&:name)
+    set_ingredients
 
     haml :'meals/new'
   end
 
   post '/meals/new' do
     @meal = current_user.meals.build(params[:meal])
-
     @new_ingredients = params[:ingredients][:name]
 
     build_ingredient_associations
-    @meal.save
-    flash[:error] = @meal.errors.full_messages
 
-    if @meal.errors.any?
-      redirect('/meals/new')
-    else
+    if @meal.save
       redirect_to_dashboard
+    else
+      flash[:error] = @meal.errors.full_messages
+      redirect('/meals/new')
     end
   end
 
   get '/meal/edit/:id' do
-    @meal = Meal.find(params[:id])
-    @ingredients = Ingredient.all.sort_by(&:name)
+    set_meal
+    set_ingredients
 
     if current_user == @meal.user
       haml :'meals/edit'
@@ -56,12 +54,13 @@ class MealsController < ApplicationController
   end
 
   get '/meal/delete/:id' do
-    @meal = Meal.find(params[:id]).destroy
-    redirect "dashboard/#{@meal.user.username}"
+    set_meal
+    @meal.destroy
+    redirect_to_dashboard
   end
 
   get '/meal/:id' do
-    @meal = Meal.find(params[:id])
+    set_meal
 
     haml :'meals/show'
   end
@@ -69,6 +68,10 @@ class MealsController < ApplicationController
   helpers do
     def set_meal
       @meal = Meal.find_by(id: params[:id])
+    end
+
+    def set_ingredients
+      @ingredients = Ingredient.all.sort_by(&:name)
     end
 
     def build_ingredient_associations
@@ -82,6 +85,5 @@ class MealsController < ApplicationController
     def flash_errors
       flash[:error] = @meal.errors.full_messages
     end
-    
   end
 end
