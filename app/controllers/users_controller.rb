@@ -27,7 +27,7 @@ class UsersController < ApplicationController
 
   get '/login' do
     redirect_to_dashboard if logged_in?
-    haml :login
+    haml :'users/login'
   end
 
   post '/login' do
@@ -43,11 +43,5 @@ class UsersController < ApplicationController
   get '/logout' do
     session.clear
     redirect '/'
-  end
-
-  get '/logout' do
-    session.clear
-    redirect '/'
-    haml :index
   end
 end
