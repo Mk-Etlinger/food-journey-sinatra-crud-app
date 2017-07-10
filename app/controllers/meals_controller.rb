@@ -16,13 +16,9 @@ class MealsController < ApplicationController
   post '/meals/new' do
     @meal = current_user.meals.build(params[:meal])
 
-    new_ingredients = params[:ingredients][:name]
+    @new_ingredients = params[:ingredients][:name]
 
-    if new_ingredients.include?(',')
-      @meal.parse_ingredients(new_ingredients)
-    elsif !new_ingredients.include?(',') && !new_ingredients.empty?
-      @meal.ingredients << Ingredient.find_or_create_by(name: new_ingredients)
-    end
+    build_ingredient_associations
     @meal.save
     flash[:error] = @meal.errors.full_messages
 
@@ -44,20 +40,19 @@ class MealsController < ApplicationController
     end
   end
 
-  patch '/edit' do
-    @meal = Meal.find_by(description: params[:meal][:description])
-    @meal.update(params[:meal])
+  patch '/meals/edit/:id' do
+    set_meal
 
-    new_ingredients = params[:ingredients][:name]
-
-    if new_ingredients.include?(',')
-      @meal.parse_ingredients(new_ingredients)
-    elsif !new_ingredients.include?(',') && !new_ingredients.empty?
-      @meal.ingredients << Ingredient.find_or_create_by(name: new_ingredients)
+    if @meal.update(params[:meal])
+      @new_ingredients = params[:ingredients][:name]
+      build_ingredient_associations
+    else
+      flash[:error] = @meal.errors.full_messages
+      redirect back
     end
-    @meal.save
 
-    redirect "dashboard/#{@meal.user.username}"
+    @meal.save
+    redirect_to_dashboard
   end
 
   get '/meal/delete/:id' do
@@ -73,8 +68,20 @@ class MealsController < ApplicationController
 
   helpers do
     def set_meal
-      @meal = Meal.find_by(id: params[:id]).destroy
+      @meal = Meal.find_by(id: params[:id])
     end
-      
-  end 
+
+    def build_ingredient_associations
+      if @new_ingredients.include?(',')
+        @meal.parse_ingredients(@new_ingredients)
+      elsif !@new_ingredients.include?(',') && !@new_ingredients.empty?
+        @meal.ingredients << Ingredient.find_or_create_by(name: @new_ingredients)
+      end
+    end
+
+    def flash_errors
+      flash[:error] = @meal.errors.full_messages
+    end
+    
+  end
 end
