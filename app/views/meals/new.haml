@@ -1,7 +1,7 @@
 %h3.title Add a meal
 - if flash.has?(:error)
     = flash[:error][0]
-%form{ action: "/new", method: "POST" }
+%form{ action: "/meals/new", method: "POST" }
     #new
         %p
         %input#radio1{ checked: "checked", name: "meal[meal_type]", type: "radio", value: "breakfast" }/
