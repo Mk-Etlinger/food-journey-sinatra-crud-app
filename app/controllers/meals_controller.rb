@@ -1,7 +1,7 @@
 require 'pry'
 
 class MealsController < ApplicationController
-  ['/meals/new', '/meal/edit/*', '/meal/*', '/meal/delete/*'].each do |path|
+  ['/meals/new', '/meals/*'].each do |path|
     before path do
       authenticate_user
     end
@@ -27,7 +27,7 @@ class MealsController < ApplicationController
     end
   end
 
-  get '/meal/edit/:id' do
+  get '/meals/:id/edit' do
     set_meal
     set_ingredients
 
@@ -38,7 +38,7 @@ class MealsController < ApplicationController
     end
   end
 
-  patch '/meals/edit/:id' do
+  patch '/meals/:id' do
     set_meal
 
     if @meal.update(params[:meal])
@@ -53,13 +53,13 @@ class MealsController < ApplicationController
     redirect_to_dashboard
   end
 
-  get '/meal/delete/:id' do
+  get '/meals/:id/delete' do
     set_meal
     @meal.destroy
     redirect_to_dashboard
   end
 
-  get '/meal/:id' do
+  get '/meals/:id' do
     set_meal
 
     haml :'meals/show'

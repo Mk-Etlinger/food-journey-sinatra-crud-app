@@ -11,4 +11,11 @@ class Meal < ActiveRecord::Base
       ingredients << Ingredient.find_or_create_by(name: ingredient.strip)
     end
   end
+
+  #def ingredients_attributes=(ingredients)
+    #ingredients = [{name: "sausage"}, {name: "eggs"}, {name: "cheese"}]
+    #self.ingredients.find_or_create_by
+
+  #end
+  
 end

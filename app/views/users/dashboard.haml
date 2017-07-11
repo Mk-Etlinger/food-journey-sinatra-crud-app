@@ -3,10 +3,10 @@
 - @user.meals.all.each do |meal|
     #dash_box    
         %h3.meal_link
-            %a{ href: url("/meal/#{meal.id}") } #{meal.meal_type + '-' + meal.description}
+            %a{ href: url("/meals/#{meal.id}") } #{meal.meal_type + '-' + meal.description}
             #dashboard 
-                %a{ class: "dash_link_small", href: url("/meal/edit/#{meal.id}") } edit
-                %a{ class: "dash_link_small", href: url("/meal/delete/#{meal.id}") } delete
+                %a{ class: "dash_link_small", href: url("/meals/#{meal.id}/edit") } edit
+                %a{ class: "dash_link_small", href: url("/meals/#{meal.id}/delete") } delete
 %p
     %a{ class: "button", href: url("/meals/new") } Add a meal!
 
