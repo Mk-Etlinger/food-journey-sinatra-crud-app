@@ -1,2 +1,5 @@
 # food_journey
-A food journal app
+A simple food journalling app built with Sinatra.
+
+Demo:
+http://food-journey-sinatra.herokuapp.com/
